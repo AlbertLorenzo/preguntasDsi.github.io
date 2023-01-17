@@ -8,6 +8,18 @@ class Component {
         this.id = id + 1;
     }
 
+    #randomize() {
+        const questions = [this.a1, this.a2, this.a3];
+        
+        questions.sort(() => Math.random() - 0.5);
+
+        return `
+            <li data-value='${questions[0].correct}'>${questions[0].text}</li>
+            <li data-value='${questions[1].correct}'>${questions[1].text}</li>
+            <li data-value='${questions[2].correct}'>${questions[2].text}</li>
+        `;
+    }
+
     getComponentData() {
         return this.data;
     }
@@ -16,9 +28,7 @@ class Component {
         return `<div class='card' id='${this.id}'>
                               <h1>${this.title}</h1>
                                   <ul id='ul-${this.id}'>
-                                      <li class='option' data-value='${this.a1.correct}'><p>${this.a1.text}</p></li>
-                                      <li class='option' data-value='${this.a2.correct}'><p>${this.a2.text}</p></li>
-                                      <li class='option' data-value='${this.a3.correct}'><p>${this.a3.text}</p></li>
+                                    ${this.#randomize()}
                                   </ul>
                               </div>`;
     }
